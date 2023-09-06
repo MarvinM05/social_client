@@ -27,7 +27,7 @@ const LoginPage = () => {
         backgroundColor={theme.palette.background.alt}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Welcome to Perspectiva, the premier Social Network for those with
+          Welcome to PerspectivApp, the premier Social Network for those with
           exceptional perspectives!
         </Typography>
         <Form />
