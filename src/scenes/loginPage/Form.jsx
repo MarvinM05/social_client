@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "components/FlexBetween";
+import Loader from "components/Loader";
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -54,10 +55,14 @@ const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
+  const [loading, setLoading] = useState(false);
+
 
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
   const register = async (values, onSubmitProps) => {
+    setLoading(true);
+
     // this allows us to send form info with image
     const formData = new FormData();
     for (let value in values) {
@@ -70,6 +75,8 @@ const Form = () => {
       body: formData,
     });
     const savedUser = await savedUserResponse.json();
+    setLoading(false);
+
     onSubmitProps.resetForm();
 
     if (savedUser) {
@@ -78,12 +85,16 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
+    setLoading(true);
+
     const loggedInResponse = await fetch(`${apiUrl}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
+    setLoading(false);
+
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(
@@ -118,7 +129,10 @@ const Form = () => {
         resetForm,
       }) => (
         <form onSubmit={handleSubmit}>
-          <Box
+          {loading ? (
+            <Loader />
+          ) : (
+              <Box
             display="grid"
             gap="30px"
             gridTemplateColumns="repeat(4, minmax(0, 1fr))"
@@ -230,6 +244,7 @@ const Form = () => {
               sx={{ gridColumn: "span 4" }}
             />
           </Box>
+          )}
 
           {/* BUTTONS */}
           <Box>

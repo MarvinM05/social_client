@@ -21,22 +21,23 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
-  const isFriend = friends.find((friend) => friend._id === friendId);
+  const isFriend = Array.isArray(friends)
+    ? friends.find((friend) => friend._id === friendId)
+    : null;
 
+  
   const patchFriend = async () => {
-    const response = await fetch(
-      `${apiUrl}/users/${_id}/${friendId}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`${apiUrl}/users/${_id}/${friendId}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
   };
+
 
   return (
     <FlexBetween>
@@ -66,16 +67,20 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           </Typography>
         </Box>
       </FlexBetween>
-      <IconButton
-        onClick={() => patchFriend()}
-        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-      >
-        {isFriend ? (
-          <PersonRemoveOutlined sx={{ color: primaryDark }} />
-        ) : (
-          <PersonAddOutlined sx={{ color: primaryDark }} />
-        )}
-      </IconButton>
+      {isFriend !== null ? (
+        <IconButton
+          onClick={() => patchFriend()}
+          sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+        >
+          {isFriend ? (
+            <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          ) : (
+            <PersonAddOutlined sx={{ color: primaryDark }} />
+          )}
+        </IconButton>
+      ) : (
+        <Typography>Error: Friends data is not available</Typography>
+      )}
     </FlexBetween>
   );
 };
