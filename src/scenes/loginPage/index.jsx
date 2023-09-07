@@ -15,7 +15,7 @@ const LoginPage = () => {
         textAlign="center"
       >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
-          PerspectivApp
+          SocialDev
         </Typography>
       </Box>
 
@@ -27,7 +27,7 @@ const LoginPage = () => {
         backgroundColor={theme.palette.background.alt}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
-          Welcome to PerspectivApp, the premier Social Network for those with
+          Welcome to SocialDev, the premier Social Network for those with
           exceptional perspectives!
         </Typography>
         <Form />

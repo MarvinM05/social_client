@@ -38,7 +38,7 @@ const Navbar = () => {
             },
           }}
         >
-          Social
+          SocialDev
         </Typography>
 
         {isNonMobileScreens && (
