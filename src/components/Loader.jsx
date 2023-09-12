@@ -12,7 +12,7 @@ const Loader = () => {
         height: "50vh",
       }}
     >
-      <Typography variant="body1">Please wait...</Typography>
+      <Typography variant="body1">Loading, please wait...</Typography>
       <CircularProgress />
     </div>
   );
