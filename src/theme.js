@@ -102,5 +102,16 @@ export const themeSettings = (mode) => {
         fontSize: 14,
       },
     },
+    shadows: {
+      ...(mode === "dark"
+        ? {
+            paper: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            // Agrega sombras adicionales para elementos en modo oscuro si es necesario
+          }
+        : {
+            paper: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            // Agrega sombras adicionales para elementos en modo claro si es necesario
+          }),
+    },
   };
 };
