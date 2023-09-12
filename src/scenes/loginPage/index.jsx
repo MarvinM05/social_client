@@ -9,15 +9,21 @@ const LoginPage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
    useEffect(() => {
-     // Make a GET request to the server's ping route
-     fetch(`${apiUrl}/ping`)
-       .then((response) => response.text())
-       .then((data) => {
-         console.log(data); // Server response
-       })
-       .catch((error) => {
+     const checkServerStatus = async () => {
+       try {
+         const response = await fetch(`${apiUrl}/ping`);
+         if (response.status === 200) {
+           const data = await response.text();
+           console.log(data); // Server response
+         } else {
+           console.error("Server is not ready yet.");
+         }
+       } catch (error) {
          console.error("Error:", error);
-       });
+       }
+     };
+
+     checkServerStatus();
    }, []);
 
   return (
