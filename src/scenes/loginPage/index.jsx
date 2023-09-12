@@ -1,10 +1,24 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import Form from "./Form";
+import React, { useEffect } from "react";
 
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 const LoginPage = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+
+   useEffect(() => {
+     // Make a GET request to the server's ping route
+     fetch(`${apiUrl}/ping`)
+       .then((response) => response.text())
+       .then((data) => {
+         console.log(data); // Server response
+       })
+       .catch((error) => {
+         console.error("Error:", error);
+       });
+   }, []);
 
   return (
     <Box>
