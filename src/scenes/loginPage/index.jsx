@@ -25,6 +25,9 @@ const LoginPage = () => {
         m="2rem auto"
         borderRadius="1.5rem"
         backgroundColor={theme.palette.background.alt}
+        sx={{
+          boxShadow: theme.shadows.paper,
+        }}
       >
         <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
           Welcome to SocialDev, the premier Social Network for those with
